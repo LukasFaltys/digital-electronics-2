@@ -426,19 +426,12 @@ uint8_t oled_drawPixel(uint8_t x, uint8_t y, uint8_t color){
     
     if( color == WHITE){
         displayBuffer[(y / 8)][x] |= (1 << (y % 8));
-        displayBuffer[(y / 8)][x] |= (1 << (y+1 % 8));
-        displayBuffer[(y / 8)][x+1] |= (1 << (y % 8));
-        displayBuffer[(y / 8)][x+1] |= (1 << (y+1 % 8));
-    }
-    else {
-        displayBuffer[(y / 8)][x] |= (1 << (y % 8));
-        displayBuffer[(y / 8)][x] |= (1 << (y+1 % 8));
-        displayBuffer[(y / 8)][x+1] |= (1 << (y % 8));
-        displayBuffer[(y / 8)][x+1] |= (1 << (y+1 % 8));
-    } 
-   return 0;
+    } else {
+        displayBuffer[(y / 8)][x] &= ~(1 << (y % 8));
     }
     
+    return 0;
+}
     
 
 uint8_t oled_drawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t color){
